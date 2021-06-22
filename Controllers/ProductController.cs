@@ -22,8 +22,8 @@ namespace Loja.Controllers {
         [Route("{id:int}")] // No 'GetById' vai retornar só uma categoria, baseada no id da mesma
         [AllowAnonymous]
         public async Task<ActionResult<Product>> GetById ([FromServices] DataContext context, int id){
-            var product = await context.Products.Include(x => x.Category).AsNoTracking().FirstOrDefaultAsync(x => x.Id == id);
-            return product;
+            var products = await context.Products.Include(x => x.Category).AsNoTracking().FirstOrDefaultAsync(x => x.Id == id);
+            return products;
         }
         // Esse método pode ser dentro de categorias ou produtos, nesse caso usamos em produtos pela praticidade
         [HttpGet] // GETBYCATEGORY products/categories/1, ou seja, listar todos os produtos da categoria 1
